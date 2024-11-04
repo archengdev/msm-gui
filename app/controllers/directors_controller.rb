@@ -36,4 +36,25 @@ class DirectorsController < ApplicationController
 
     render({ :template => "director_templates/eldest" })
   end
+
+  def insert
+    dir = Director.new
+    dir.name = params.fetch("query_name")
+    dir.dob = params.fetch("query_dob")
+    dir.bio = params.fetch("query_bio")
+    dir.image = params.fetch("query_image")
+    dir.id = rand(1000..100000)
+    dir.save
+
+    redirect_to("/directors")
+  end
+  def delete
+    Director.destroy(params.fetch("id"))
+    redirect_to("/directors")
+  end
+  def modify
+    id = params.fetch("id")
+    redirect_to("/directors")
+
+  end
 end
