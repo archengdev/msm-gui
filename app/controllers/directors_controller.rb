@@ -54,7 +54,13 @@ class DirectorsController < ApplicationController
   end
   def modify
     id = params.fetch("id")
-    redirect_to("/directors")
+    dir = Director.where({:id => id})[0]
+    dir.name = params.fetch("query_name")
+    dir.dob = params.fetch("query_dob")
+    dir.bio = params.fetch("query_bio")
+    dir.image = params.fetch("query_image")
+    dir.save
+    redirect_to("/directors/" + id)
 
   end
 end
